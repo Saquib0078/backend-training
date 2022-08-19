@@ -26,9 +26,9 @@ router.post('/getParticularBooks',bookControllers.getParticularBooks)
 router.post('/addBook',bookControllers.addBook)
 router.post('/addAuthor',bookControllers.addAuthor)
 router.get('/ChetanBhagat',bookControllers.ChetanBhagat)
-router.get('/ChetanBhagatBooks',bookControllers.ChetanBhagatBooks)
+// router.get('/ChetanBhagatBooks',bookControllers.ChetanBhagatBooks)
 router.get('/AuthorTwoStates',bookControllers.AuthorTwoStates)
-router.get('/FindAuthor',bookControllers.FindAuthor)
+// router.get('/FindAuthor',bookControllers.FindAuthor)
 router.get('/FindBooks',bookControllers.FindBooks)
 
 
