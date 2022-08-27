@@ -14,7 +14,7 @@ router.get("/test-me", function (req, res) {
 
 
 
-router.post("/createOrder",commonMW.mid2,commonMW.mid3, OrderController.createOrder  )
+router.post("/createOrder",commonMW.mid2,commonMW.mid1, OrderController.createOrder  )
 
 router.post("/createUser",commonMW.mid2, UserController.createUser)
 

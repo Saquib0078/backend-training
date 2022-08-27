@@ -6,6 +6,7 @@ const createOrder= async function (req, res,next) {
     let savedData= await OrderModel.create(data)
       res.send({data: savedData})
       
+      
 }
 
 
