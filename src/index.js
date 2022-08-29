@@ -17,10 +17,10 @@ mongoose.connect("mongodb+srv://functionup-cohort:3bMssIUqmBmIqb3e@cluster0.3ccg
 
 app.use('/', route)
 
-app.use('*',function(req,res){
-    console.log('error')
-    res.status(404).send('endpoint error')
-})
+// app.use('*',function(req,res){
+//     console.log('error')
+//     res.status(404).send('endpoint error')
+// })
 app.listen(process.env.PORT || 3000, function () {
     console.log('Express app running on port ' + (process.env.PORT || 3000))
 });
