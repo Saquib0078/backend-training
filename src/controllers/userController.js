@@ -2,16 +2,11 @@
 
 const userModel=require("../models/userModel")
 const jwt = require("jsonwebtoken")
-
-
-
 // 1) CreateUser ....
-
-
 const createUser = async function (req, res) {
     let data = req.body;
     let savedData = await userModel.create(data);
-    res.send({ msg: savedData });
+    res.status(201).send({ msg: savedData });
   };
   //2) LoginUser.....
   const loginUser = async function (req, res) {
@@ -43,7 +38,7 @@ const createUser = async function (req, res) {
       res.send({ status: true, data: userDetails });
     }
     catch(err){
-      return res.send({ status: false, msg: "No such user exists" });
+      return res.status(400).send({ status: false, msg: "No such user exists" });
     }
   };
   
@@ -59,7 +54,7 @@ const createUser = async function (req, res) {
       res.send({ status: true, data: updatedUser });
     }
     catch(err){
-      return res.send({ status: false, msg: "No such user exists" });
+      return res.status(git).send({ status: false, msg: "No such user exists" });
     }
   };
   
