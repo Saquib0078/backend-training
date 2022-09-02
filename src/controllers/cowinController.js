@@ -90,12 +90,11 @@ let getWeather = async function (req, res) {
         }
 
         let Weather = await axios(object)
-        let data = Weather.data
-        console.log(data)
-        res.send(data)
+        let data = Weather.data.main.temp
+        res.send({status:true,data:data})
     }
     catch (err) {
-        res.send(err.message)
+        res.status(500).send("server error")
 
     }
 }
@@ -104,38 +103,48 @@ let SortCities = async function (req, res) {
 
     try {
         let cities = ["Bengaluru", "Mumbai", "Delhi", "Kolkata", "Chennai", "London", "Moscow"]
-        let CityObj = []
-        for (i = 0; i = cities.length; i++) {
+        let CityObjArray = []
+        for (i = 0; i < cities.length; i++) {
             let obj = { city: cities[i] }
 
-            let resp = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${((cities[i]))}&appid=7896f4348c4a34bcb980693efd8488ae`)
+            let resp = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${cities[i]}&appid=7896f4348c4a34bcb980693efd8488ae`)
             obj.temp = resp.data.main.temp
-            CityObj.push(obj)
-            let SortedCities = CityObj.sort(function (a, b) { return a.temp - b.temp })
-            res.status(200).send({ status: true, data: SortedCities })
+            CityObjArray.push(obj)
 
         }
+        let SortedCities = CityObjArray.sort(function (a, b) { return a.temp - b.temp })
+
+        res.status(200).send({ status: true, data: SortedCities })
+
     } catch (err) {
-        res.status(500).send(err.message)
+        res.status(500).send('server error')
 
     }
 }
 
-const MemeShare=async function(res,res){
+const MemeShare = async function (req, res) {
 
-try {
-    let options={
-        method:'post',
-        url:`https://api.imgflip.com/caption_image?template_id=${id}&text0=${text0}&text1=&${text1}&username=${user}&password=${password}`
+
+    try {
+        let memeid=req.query.template_id
+        let text0=req.query.text0
+        let text1=req.query.text1
+        let user=req.query.username
+        let pass=req.query.password
+
+
+        let options = {
+            method: 'post',
+            url: `https://api.imgflip.com/caption_image?template_id=${memeid}&text0=${text0}&text1=${text1}&username=${user}&password=${pass}`
+        }
+        let result = await axios(options)
+        res.status(200).send({ data: result.data })
+
+    } catch (error) {
+        res.status(500).send({ status: false, error: "server error" })
+
     }
-    let result = await axios(options)
-    res.send({data:result.data})
 
-} catch(error) {
-    res.send({status:false,error:"server error"})
-
-}
-      
 }
 
 
